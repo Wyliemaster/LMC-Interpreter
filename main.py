@@ -15,6 +15,8 @@ class LittleManComputer():
         self.DEBUG = False
         self.execute_LMC()
 
+
+# Parses the .s file and pushes the data into 2 lists. one for lines, the other for variables
     def parse_LMC(self):
         with open(self.path, "r") as file:
             lines = file.read().split("\n")
@@ -25,8 +27,7 @@ class LittleManComputer():
                         continue
                     self.lines.append(line)
                     if line[1].upper() == "DAT":
-                        self.data.append(
-                            {"variable_name": line[0], "value": line[2]})
+                        self.data.append({"variable_name": line[0], "value": line[2]})
                 except:
                     continue
 
@@ -47,7 +48,6 @@ class LittleManComputer():
                     self.index = 1
             except:
                 pass
-           # looks awful but i couldn't use match because i couldn't use 3.10
 
             if line[self.index].upper() == "LDA":
                 self.load_variable(line[self.index + 1])
@@ -82,8 +82,7 @@ class LittleManComputer():
             # no DAT since that gets parsed in the parse_LMC method
 
             if self.DEBUG:
-                print(
-                    f"[DEBUG]\n    Accumulator: {self.accumulator}\n    Current_line: {self.current_line}\n    Current Instruction: {line[self.index].upper()}\n[DEBUG]")
+                print(f"[DEBUG]\n    Accumulator: {self.accumulator}\n    Current_line: {self.current_line}\n    Current Instruction: {line[self.index].upper()}\n[DEBUG]")
 
             self.current_line += 1
 
