@@ -17,6 +17,7 @@ class LittleManComputer():
 
 
 # Parses the .s file and pushes the data into 2 lists. one for lines, the other for variables
+
     def parse_LMC(self):
         with open(self.path, "r") as file:
             lines = file.read().split("\n")
@@ -27,7 +28,8 @@ class LittleManComputer():
                         continue
                     self.lines.append(line)
                     if line[1].upper() == "DAT":
-                        self.data.append({"variable_name": line[0], "value": line[2]})
+                        self.data.append(
+                            {"variable_name": line[0], "value": line[2]})
                 except:
                     continue
 
@@ -49,40 +51,43 @@ class LittleManComputer():
             except:
                 pass
 
-            if line[self.index].upper() == "LDA":
+            opcode = line[self.index].upper()
+
+            if opcode == "LDA":
                 self.load_variable(line[self.index + 1])
 
-            elif line[self.index].upper() == "ADD":
+            elif opcode == "ADD":
                 self.add(line[self.index + 1])
 
-            elif line[self.index].upper() == "SUB":
+            elif opcode == "SUB":
                 self.sub(line[self.index + 1])
 
-            elif line[self.index].upper() == "STA":
+            elif opcode == "STA":
                 self.store_data(line[self.index + 1])
 
-            elif line[self.index].upper() == "INP":
+            elif opcode == "INP":
                 self.get_input()
 
-            elif line[self.index].upper() == "HLT":
+            elif opcode == "HLT":
                 break
 
-            elif line[self.index].upper() == "OUT":
+            elif opcode == "OUT":
                 self.output()
 
-            elif line[self.index].upper() == "BRP":
+            elif opcode == "BRP":
                 self.branch_if_positive(line[self.index + 1])
 
-            elif line[self.index].upper() == "BRA":
+            elif opcode == "BRA":
                 self.branch(line[self.index + 1])
 
-            elif line[self.index].upper() == "BRZ":
+            elif opcode == "BRZ":
                 self.branch_if_zero(line[self.index + 1])
 
             # no DAT since that gets parsed in the parse_LMC method
 
             if self.DEBUG:
-                print(f"[DEBUG]\n    Accumulator: {self.accumulator}\n    Current_line: {self.current_line}\n    Current Instruction: {line[self.index].upper()}\n[DEBUG]")
+                print(
+                    f"[DEBUG]\n    Accumulator: {self.accumulator}\n    Current_line: {self.current_line}\n    Current Instruction: {line[self.index].upper()}\n[DEBUG]")
 
             self.current_line += 1
 
@@ -129,7 +134,8 @@ class LittleManComputer():
 
 
 def main():
-    LittleManComputer("./sample.s")
+    path = input("Path To LMC File: ")
+    LittleManComputer(path)
 
 
 main()
