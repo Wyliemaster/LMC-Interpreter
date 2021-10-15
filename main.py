@@ -76,7 +76,7 @@ class LittleManComputer():
             elif line[self.index].upper() == "BRA":
                 self.branch(line[self.index + 1])
 
-            elif line[self.index].upper() == "BNZ":
+            elif line[self.index].upper() == "BRZ":
                 self.branch_if_zero(line[self.index + 1])
 
             # no DAT since that gets parsed in the parse_LMC method
