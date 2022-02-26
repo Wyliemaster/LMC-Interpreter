@@ -1,5 +1,5 @@
 # LMC Emulator
-An Emulator for LittleManComputer that i wrote in a bit of free time
+An Interpreter for LittleManComputer that i wrote in a bit of free time
 
 ## Requirements
 
